@@ -1,0 +1,293 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Find Trouble Ticket</title>
+</head>
+<body>
+    <div style="text-align:left;border:none">
+        <div style="height:100%;width:75%;">
+            <div>
+                <h2>Create Trouble Ticket</h2>
+            </div>
+            <hr />
+            <h3>Please select the service you are reporting trouble on</h3>
+
+        </div>
+        <div class="container-fluid" ng-controller="CircuitOrPhoneController">
+            <table id="tblLookup" cellpadding="0" cellspacing="0" style="width:95%" border="0">
+
+                <tr class="row" style="height:20px"><td><input type="hidden" name="accountnumber" ng-value="accNum" /></td></tr>
+
+                <tr>
+                    <td>
+                        <table id="tblFindBy" cellpadding="0" cellspacing="0" style="width:100%" border="0">
+                            <tr class="row hidErrorMessage">
+                                <td colspan="2">
+                                    <div class="alert alert-danger" role="alert">
+                                        <div>
+                                            <div>
+                                                <strong>No Phone Line Found</strong><br />
+                                                &nbsp;&nbsp;&nbsp;-&nbsp; Please re-enter your phone number
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="row hidOrderErrorMessage">
+                                <td colspan="2">
+                                    <div class="alert alert-danger" role="alert">
+                                        <div>
+                                            <div>
+                                                <strong>We found an open Order for this line which may be related to the trouble your are expirencing.</strong><br />
+                                                <b>Managing this order</b> or contact Customer service at 1.800.921.    8102
+                                                <br />Clear the form below to create a new Trouble Ticket on a different line below
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="row hidTicketErrorMessage">
+                                <td colspan="2">
+                                    <div class="alert alert-danger" role="alert">
+                                        <div>
+                                            <div>
+                                                <strong>We found an open Trouble Ticket for this line.</strong><br />
+                                                <b>Managing this Ticket</b> or contact Customer service at 1.800.921.8102
+                                                <br />Clear the form below to create a new Trouble Ticket on a different line below
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="row">
+                                <td class="col-lg-4">
+                                    <label><strong>Select Type: </strong> </label>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="selType" id="selFindBy" style="width:100%" onchange="return fnOnchangeEvent();">
+                                        <option value="" selected>Please select</option>
+                                        <option value="phn">Phone Number</option>
+                                        <option value="cir">Circuit</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="row" style="height:10px"><td></td></tr>
+                            <tr class="row hidProduct">
+                                <td class="col-lg-4">
+                                    <label style="width:100%"><strong>Select Product: </strong> </label>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="selprodtype" id="selProd" style="width:100%" onchange="return fnOnchangeProduct();">
+                                        <option value="" selected>Please select</option>
+                                        <option value="Vi">Voice</option>
+                                        <option value="In">Internet</option>
+                                        <option value="Vid">Video</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="row" style="height:10px"><td></td></tr>
+                            <tr class="row hidErrorshortmsg">
+                                <td class="col-lg-4"></td>
+                                <td>
+                                    <strong class="red-alert">* Feature currently not available. Please select a different product.</strong>
+                                </td>
+                            </tr>
+                            <tr class="row hidCircuitID">
+                                <td class="col-lg-4">
+                                    <label style="width:100%"><strong>Circuit ID: </strong> </label>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-init="selcircuitIDList = selcircuitID[0]"  ng-model="selcircuitIDList" ng-change="checkstatusofButtons();"  ng-options="circuitID.circuitid for circuitID in selcircuitID"></select>
+                                </td>
+                            </tr>
+                            <tr class="row" style="height:15px"><td></td></tr>
+                            <tr class="row hidPhoneNumber01">
+                                <td class="col-lg-4">
+                                    <label style="width:100%"><strong>Phone Number: </strong> </label>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="ph1" name="phone-1" maxlength="3" style="width:10%" placeholder="XXX"> -
+                                    <input type="text" ng-model="ph2" name="phone-2" maxlength="3" style="width:15%" placeholder="XXX"> -
+                                    <input type="text" ng-model="ph3" name="phone-3" maxlength="4" style="width:20%" placeholder="XXXX">
+                                </td>
+                            </tr>
+                            <tr class="row" style="height:45px"><td></td></tr>
+                            <tr class="row hidbuttons">
+                                <td class="col-lg-4"></td>
+                                <td align="right">
+                                    <table>
+                                        <tr>
+                                            <td class="col-lg-7"></td>
+                                            <td><button class="pull-right btn-default">&nbsp;&nbsp;&nbsp;Clear&nbsp;&nbsp;&nbsp;</button></td>
+                                            <td style="width:1%"></td>
+                                            <td>
+                                                <button class="btn-danger" style="margin-left:10px" ng-click="search()">&nbsp;&nbsp;&nbsp;Continue&nbsp;&nbsp;&nbsp;</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                            <tr class="row hidManageOrderbuttons">
+                                <td class="col-lg-4"></td>
+                                <td align="right">
+                                    <table>
+                                        <tr>
+                                            <td class="col-lg-4"></td>
+                                            <td><button class="pull-right btn-danger">Clear Form</button></td>
+                                            <td style="width:1%"></td>
+                                            <td>
+                                                <button class="btn-default" style="margin-left:10px" @*ng-click="search()"*@>Manage Order</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                            <tr class="row hidManageTicket">
+                                <td class="col-lg-4"></td>
+                                <td align="right">
+                                    <table>
+                                        <tr>
+                                            <td class="col-lg-4"></td>
+                                            <td><button class="pull-right btn-default btn-danger">Clear Form</button></td>
+                                            <td style="width:1%"></td>
+                                            <td>
+                                                <button class="btn-default" style="margin-left:10px" @*ng-click="search()"*@>Manage Ticket</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                            <tr class="row hidCircuitbuttons">
+                                <td class="col-lg-4"></td>
+                                <td align="right">
+                                    <table>
+                                        <tr>
+                                            <td class="col-lg-7"></td>
+                                            <td><button class="pull-right btn-default">&nbsp;&nbsp;&nbsp;Clear&nbsp;&nbsp;&nbsp;</button></td>
+                                            <td style="width:1%"></td>
+                                            <td>
+                                                <button class="btn-danger" style="margin-left:10px" ng-click="circuitnext()">&nbsp;&nbsp;&nbsp;Continue&nbsp;&nbsp;&nbsp;</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#tblLookup .hidErrorMessage').hide();
+        $('#tblLookup .hidOrderErrorMessage').hide();
+        $('#tblLookup .hidTicketErrorMessage').hide();
+
+        $('#tblFindBy .hidProduct').hide();
+        $('#tblFindBy .hidCircuitID').hide();
+        $('#tblFindBy .hidPhoneNumber01').hide();
+        $('#tblFindBy .hidPhoneNumber02').hide();
+        $('#tblFindBy .hidbuttons').hide();
+        $('#tblFindBy .hidManageOrderbuttons').hide();
+        $('#tblFindBy .hidManageTicket').hide();
+        $('#tblFindBy .hidErrorshortmsg').hide();
+        $('#tblFindBy .hidCircuitbuttons').hide();
+
+    });
+
+    function fnShowButtons() {
+        $('#tblFindBy .hidCircuitbuttons').show();
+    }
+    function fnOnchangeEvent() {
+
+        if ($('#selFindBy').val() == "phn") {
+            $('#tblFindBy .hidCircuitID').hide();
+            $('#tblFindBy .hidPhoneNumber01').hide();
+            $('#tblFindBy .hidPhoneNumber02').hide();
+            $('#tblFindBy .hidProduct').show();
+
+        }
+        else if ($('#selFindBy').val() == "cir") {
+
+            $('#tblFindBy .hidCircuitID').show();
+            $('#tblFindBy .hidProduct').hide();
+            $('#tblFindBy .hidPhoneNumber01').hide();
+            $('#tblFindBy .hidPhoneNumber02').hide();
+        }
+        else {
+            $('#tblLookup .hidErrorMessage').hide();
+            $('#tblLookup .hidOrderErrorMessage').hide();
+            $('#tblLookup .hidTicketErrorMessage').hide();
+
+            $('#tblFindBy .hidProduct').hide();
+            $('#tblFindBy .hidCircuitID').hide();
+            $('#tblFindBy .hidPhoneNumber01').hide();
+            $('#tblFindBy .hidPhoneNumber02').hide();
+            $('#tblFindBy .hidbuttons').hide();
+            $('#tblFindBy .hidManageOrderbuttons').hide();
+            $('#tblFindBy .hidManageTicket').hide();
+            $('#tblFindBy .hidErrorshortmsg').hide();
+            $('#tblFindBy .hidCircuitbuttons').hide();
+        }
+
+    }
+
+    function fnOnchangeProduct() {
+        if ($('#selProd').val() == "Vi") {
+            $('#tblFindBy .hidErrorshortmsg').hide();
+            $('#tblFindBy .hidPhoneNumber01').show();
+            $('#tblFindBy .hidPhoneNumber02').show();
+            $('#tblFindBy .hidbuttons').show();
+        }
+        else if ($('#selProd').val() == "In" || $('#selProd').val() == "Vid") {
+            $('#tblFindBy .hidPhoneNumber01').hide();
+            $('#tblFindBy .hidPhoneNumber02').hide();
+            $('#tblFindBy .hidbuttons').hide();
+            $('#tblFindBy .hidManageOrderbuttons').hide();
+            $('#tblFindBy .hidManageTicket').hide();
+            $('#tblLookup .hidErrorMessage').hide();
+            $('#tblLookup .hidOrderErrorMessage').hide();
+            $('#tblLookup .hidTicketErrorMessage').hide();
+            $('#tblFindBy .hidCircuitbuttons').hide();
+            $('#tblFindBy .hidErrorshortmsg').show();
+        }
+        $('#tblLookup .hidErrorMessage').hide();
+
+
+    }
+
+    function fRedirectToPage() {
+        if ($("#tblFindBy .hidCircuitID").is(':hidden'))
+            window.location.href = '@Url.Content("~/CreateTroubleTicket/ErrorTroubleTicket/")';
+        else if ($("#tblFindBy .hidPhoneNumber01").is(':hidden'))
+            window.location.href = '@Url.Content("~/CreateTroubleTicket/SelectProduct/")';
+        return false;
+    }
+
+
+
+    //$(".date-picker").on("change", function () {
+    //    var id = $(this).attr("id");
+    //    var val = $("label[for='" + id + "']").text();
+    //    $("#msg").text(val + " changed");
+    //});
+</script>

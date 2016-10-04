@@ -1,0 +1,448 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    ::-webkit-input-placeholder {
+        text-align: right;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+        text-align: right;
+    }
+
+    ::-moz-placeholder { /* Firefox 19+ */
+        text-align: right;
+    }
+
+    :-ms-input-placeholder {
+        text-align: right;
+    }
+</style>
+
+<div style="text-align:left;border:none" ng-controller="CircuitTTController">
+    <div style="height:100%;width:75%;">
+
+        <div>
+            <h2>Create Trouble Ticket</h2>
+        </div>
+        <hr />
+    </div>
+    <div style="height:20px"></div>
+    <div>
+        <div class="row">
+            <div class="col-md-4">Circuit ID:</div>
+            <div class="col-md-4"><input class="w100" value="{{selectedCircuitID}}" /> </div>
+        </div>
+        <h2></h2>
+        <div style="height:20px"></div>
+        <div><h3>Please complete the form below.</h3></div>
+
+
+        <div style="height:20px"></div>
+        <hr />
+        <div style="height:10px"></div>
+        <div class="row row-eq-height"></div>
+        <div style="height:20px"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <i class="required-red"><b>All fields are required</b></i>
+            </div>
+        </div>
+        <div style="height:20px"></div>
+        <div ng-show="editable">
+            <div class="row">
+                <div class="col-md-4"><b>Circuit ID:</b></div>
+                <div class="col-md-8">{{selectedCircuitID}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Name of person opening ticket</b></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.cstmrName" placeholder="Stephen R. Vaughen" required /> </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Phone number of person opening ticket</b></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="border:none">
+                        <div class="col-md-3 nopadding"><input name="input" class="w100" ng-model="troubleTicketInfo.cstmrPh1" placeholder="XXX" required /> </div>
+                        <div class="col-md-3 nopadding"><input name="input" class="w100" ng-model="troubleTicketInfo.cstmrPh2" placeholder="XXX" required /> </div>
+                        <div class="col-md-6 nopadding"><input name="input" class="w100" ng-model="troubleTicketInfo.cstmrPh3" placeholder="XXXX" required /> </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Terminating Address:</b></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.terminatingAddress" placeholder="3565 Main St" required /></div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>City:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.city" placeholder="Rochester" required /></div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>State:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.state" placeholder="NY" required /></div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>Zip:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.zip" placeholder="14656" required /></div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Name:</b></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.localContactName" placeholder="Stephen R. Veghan" required /></div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Number:</b></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="border:none">
+                        <div class="col-md-3"><input name="input" class="w100" ng-model="troubleTicketInfo.localph1" placeholder="XXX" required /> </div>
+                        <div class="col-md-3"><input name="input" class="w100" ng-model="troubleTicketInfo.localph2" placeholder="XXX" required /> </div>
+                        <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.localph3" placeholder="XXXX" required /> </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Email:</b></div>
+                <div class="col-md-6"><input name="input" class="w100" ng-model="troubleTicketInfo.localContactEmail" placeholder="guitargood@email.com" required /></div>
+            </div>
+        </div>
+<div ng-hide="editable">
+            <div class="row">
+                <div class="col-md-4"><b>Circuit ID:</b></div>
+                <div class="col-md-8">{{selectedCircuitID}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Name of person opening ticket</b></div>
+                <div class="col-md-6">{{troubleTicketInfo.cstmrName}} </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Phone number of person opening ticket</b></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="border:none">
+                        <div class="col-md-3 nopadding">{{troubleTicketInfo.cstmrPh1}}</div>
+                        <div class="col-md-3 nopadding"> {{troubleTicketInfo.cstmrPh2}}</div>
+                        <div class="col-md-6 nopadding">{{troubleTicketInfo.cstmrPh3}}</div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6"><b>Terminating Address:</b></div>
+                <div class="col-md-6">{{troubleTicketInfo.terminatingAddress}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>City:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">{{troubleTicketInfo.city}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>State:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">{{troubleTicketInfo.state}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-3 text-center"><b>Zip:</b></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">{{troubleTicketInfo.zip}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Name:</b></div>
+                <div class="col-md-6">{{troubleTicketInfo.localContactName}}</div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Number:</b></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="border:none">
+                        <div class="col-md-3">{{troubleTicketInfo.localPh1}}</div>
+                        <div class="col-md-3">{{troubleTicketInfo.localPh1}}</div>
+                        <div class="col-md-6">{{troubleTicketInfo.localPh1}}</div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:5px"></div>
+            <div class="row">
+                <div class="col-md-6 center-block"><b>Local Contact Email:</b></div>
+                <div class="col-md-6">{{troubleTicketInfo.localContactEmail}}</div>
+            </div>
+        </div>
+        <div style="height:25px"></div>
+        <hr />
+        <div style="height:25px"></div>
+        <div class="row">
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-9">
+                        <b>Description of Problem</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea rows="5" cols="60" ng-model="troubleTicketInfo.probDesc" placeholder="Please include as much detail about this problem as possible"></textarea>
+                    </div>
+                </div>
+                <div style="height:15px"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <b>Is this circuit TSP coded?</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Yes</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="tspcoded" ng-model="chkTSPCoded.isTrue" value="true"/>
+                    </div>
+                    <div class="col-md-1">
+                        <b>No</b>
+                    </div>
+                    <div class="col-md-1"><input type="radio" name="tspcoded" class="w100 radio" ng-model="chkTSPCoded.isTrue"  value="false"/></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <b>Enter your two digit TSP code</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" ng-model="troubleTicketInfo.tspCode" class="w100" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <b> Has power and equipment been verified?</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Yes</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="eqpverified" ng-model="chkEqpVerified.isTrue" value="true" />
+                    </div>
+                    <div class="col-md-1">
+                        <b>No</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="eqpverified"  ng-model="chkEqpVerified.isTrue" value="false" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <b> Has the circuit been tested?</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Yes</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="tested" ng-model="circuitTested.isTrue" value="true" />
+                    </div>
+                    <div class="col-md-1">
+                        <b>No</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="tested" ng-model="circuitTested.isTrue" value="false" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <b>Is it OK to dispatch?</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Yes</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="dispatch" ng-model="okToDispatch.isTrue" value="true" />
+                    </div>
+                    <div class="col-md-1">
+                        <b>No</b>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="radio" class="w100 radio" name="dispatch" ng-model="okToDispatch.isTrue" value="false" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <b>Type of Trouble</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <select class="form-control" ng-init="SeltroubletypeList = Seltroubletype[0]" ng-model="SeltroubletypeList" ng-options="troubletypetext.tttext for troubletypetext in Seltroubletype"></select>
+                    </div>
+                </div>
+                <div style="height:25px"></div>
+                <div class="row" style="border:none;">
+                    <div class="col-md-12">Permise Access Days</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="tblradio">
+                        <table border="0" style="width:100%">
+                            <tr>
+                                <td align="left" valign="top" width="20%">
+                                    <input type="radio" class="w100 radio" name="monday" ng-model="mon.isTrue" value="1" />
+                                </td>
+                                <td width="45%" valign="bottom">
+                                    <label for="mon">Mon</label>
+                                </td>
+                                <td align="left" width="20%">
+                                    <input type="radio" class="w100 radio" name="friday" ng-model="fri.isTrue" value="2" />
+                                </td>
+                                <td width="15%" valign="bottom">
+                                    <label for="fri">Fri</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" class="w100 radio" name="tue" ng-model="tue.isTrue" value="3" />
+                                </td>
+                                <td>
+                                    <label for="tue">Tue</label>
+                                </td>
+                                <td>
+                                    <input type="radio" class="w100 radio" name="sat" ng-model="sat.isTrue" value="4" />
+                                </td>
+                                <td>
+                                    <label for="sat">Sat</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" class="w100 radio" name="wed" ng-model="wed.isTrue" value="5" />
+                                </td>
+                                <td>
+                                    <label for="wed">Wed</label>
+                                </td>
+                                <td>
+                                    <input type="radio" class="w100 radio" name="sun" ng-model="sun.isTrue" value="6" />
+                                </td>
+                                <td>
+                                    <label for="sun">Sun</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" class="w100 radio" name="thu" ng-model="thu.isTrue" value="7" />
+                                </td>
+                                <td>
+                                    <label for="thu">Thu</label>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="height:10px"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label><b>Interval Start time</b></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="selStarttimeinterval" class="form-control timepicker" name="timepicker" ng-model="selStarttimeinterval.$index" />
+                    </div>
+                </div>
+                <div class="row-eq-height"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label><b>Interval End time</b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="selEndtimeinterval" class="form-control timepicker" name="timepicker" ng-model="selEndtimeinterval.$index"  />
+                    </div>
+                </div>
+                <div style="height:25px"></div>
+                <div class="row">
+                    <div class="col-md-6 nopad-right">
+                        <button class="btn-default" ng-show="editable">Cancel</button>
+                        <button class="btn-default" ng-hide="editable" ng-click="Edit()">Edit</button>
+                    </div>
+                    <div class="col-md-6 nopad-left">
+                        <button class="btn-danger" ng-show="editable" ng-click="continue()">Continue</button>
+                        <button class="btn-danger" ng-hide="editable" ng-click="Createticket()">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:25px"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('input.timepicker').timepicker({
+            timeFormat: 'hh:mm p',
+            // year, month, day and seconds are not important
+            minTime: new Date(0, 0, 0, 0, 0, 0),
+            maxTime: new Date(0, 0, 0, 23, 30, 0),
+            // time entries start being generated at 6AM but the plugin 
+            // shows only those within the [minTime, maxTime] interval
+            startHour: 12,
+            // the value of the first item in the dropdown, when the input
+            // field is empty. This overrides the startHour and startMinute 
+            // options
+            startTime: new Date(0, 0, 0, 0, 0, 0),
+            // items in the dropdown are separated by at interval minutes
+            interval: 30,
+        });
+    });
+    
+    $("#tblradio input").on("mouseup", function (e) {
+
+        // cache the selected radio item
+        var thisItem = $(this);
+        // save the current state of the chosen item
+        var previous = thisItem.children("input").prop("checked");
+        // if item was previously selected then...
+        if (previous) {
+            // I introduce a slight delay
+            // Without the delay the input stays checked
+            setTimeout(function () {
+                // after the delay uncheck the item
+                // call blur() at end in case of focus indicator on input
+                thisItem.children("input").prop("checked", false).blur();
+            }, 10);
+        }
+
+    });
+</script>

@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="height:100%;width:75%;">
+
+    <div>
+        <h2>Create Trouble Ticket</h2>
+    </div>
+    <hr />
+</div>
+<div style="height:20px"></div>
+<div>
+    <div class="row">
+        <div class="col-md-4">Circuit ID:</div>
+        <div class="col-md-4"><input class="w100" value="{{selectedCircuitID}}" /> </div>
+    </div>
+</div>
+<div id="dvTicketCreated">
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>   <img src="~/resources/img/check-mark-3-icon.fw.png" style="height:30px;width:30px">Your ticket has been submitted.</h3>
+        </div>
+    </div>
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+    <div class="row">
+        <div class="col-md-6">Ticket Number: <b>{{RemedyTicketNumber}}</b></div>
+    </div>
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+    <div class="row">
+        <div class="col-md-8">
+            <button class="btn-default">Done</button>
+            <button class="btn-danger">Manage Tickets</button>
+        </div>
+
+    </div>
+</div>
+<div style="height:30px"></div>
+<hr />
+<table border="0" style="width:100%">
+    <tr class="row">
+        <td class="col-md-3">Still need help?</td>
+        <td class="col-md-4">
+            Call
+            <i class="glyphicon glyphicon-earphone"></i><b>1.800.921.8102</b>
+        </td>
+        <td class="col-md-1">or</td>
+        <td class="col-md-3"><i class="glyphicon glyphicon-comment"></i> <b>Live Chat </b></td>
+    </tr>
+</table>
+<div style="height:20px"></div>
+<hr />

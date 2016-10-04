@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "LineTestResults";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Trouble Ticket</h2>
+
+<table border="0" id="tblmain" cellpadding="0" cellspacing="0" style="width:100%">
+    <tr>
+        <td>
+            <hr />
+        </td>
+    </tr>
+
+    <tr style="height:30px"></tr>
+    <tr>
+        <td>
+            Phone Number &nbsp;&nbsp;&nbsp;<input type="text" id="txtphonenum" @*ng-model="phonenum"*@ value="585-555-0666" />
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="alert glyphicon glyphicon-alert" style="font-size:x-large;color:darkred;">
+            Line Test Results
+        </td>
+    </tr>
+    <tr class="hidNpDetected">
+        <td valign="top">
+            <table border="0" style="width:100%">
+                <tr style="height:30px"></tr>
+                <tr>
+                    <td>
+                        <table border="0" style="width:100%;">
+                            <tr>
+                                <td><h2>We detected no problems with your line.</h2></td>
+                            </tr>
+                            <tr style="height:30px"></tr>
+                            <tr>
+                                <td>click continue to troubleshoot a different line.</td>
+                            </tr>
+                            <tr style="height:30px"></tr>
+                            <tr>
+                                <td colspan="2" align="left">
+                                    <table>
+                                        <tr>
+                                            <td><button class="pull-right btn-default">&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;</button></td>
+                                            <td>
+                                                <button class="btn-danger" style="margin-left:10px" onclick="fRedirectToTroubleTicket();">&nbsp;&nbsp;&nbsp;Continue&nbsp;&nbsp;&nbsp;</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                            </tr>
+                            <tr style="height:30px"></tr>
+                            <tr>
+                                <td>
+                                    <hr />
+
+                                </td>
+                            </tr>
+                            <tr style="height:10px"></tr>
+                            <tr>
+                                <td>
+                                    <table border="0" style="width:100%">
+                                        <tr class="row">
+                                            <td class="col-md-3">Still need help?</td>
+                                            <td class="col-md-4">
+                                                Call
+                                                <i class="glyphicon glyphicon-earphone"></i><b>1.800.921.8102</b>
+                                            </td>
+                                            <td class="col-md-1">or</td>
+                                            <td class="col-md-3"><i class="glyphicon glyphicon-comment"></i> <b>Live Chat </b></td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+    <tr class="hidTroubleConnecting">
+        <td>
+            <table border="0" style="width:100%;">
+                <tr>
+                    <td>
+                        <h2>
+                            It appears we're having trouble connecting to <br />
+                            your device. Let's create a Trouble Ticket.
+                        </h2>
+                    </td>
+                </tr>
+                <tr style="height:30px"><td></td></tr>
+                <tr>
+                    <td>
+                        Your line test indicating issues with your services. The next step will be to schedule an <br /> appointment for a tech to visit your premises to investigate and/or repair the issue. Please be advised, <br />before
+                        proceeding, if you do not currently subscribe to Frontier's Inside Wire Maintenance Protection Plan <br />you may incur a repair or isolation charge if the issue is found to be within your premise.
+                    </td>
+                </tr>
+                <tr style="height:30px"><td></td></tr>
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" onclick="fnClickAgree();">Agree</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:30px"></tr>
+                <tr class="hidAgreeButtons">
+                    <td colspan="2" align="left">
+                        <table>
+                            <tr>
+                                <td><button class="pull-right btn-default">&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;</button></td>
+                                <td>
+                                    <button class="btn-danger" style="margin-left:10px" onclick="fRedirectToCreateTroubleTicket();">&nbsp;&nbsp;&nbsp;Continue&nbsp;&nbsp;&nbsp;</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="height:10px"></tr>
+    <tr>
+        <td>
+            <hr />
+        </td>
+    </tr>
+</table>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblmain .hidTroubleConnecting').hide();
+
+    });
+    function fnClickAgree() {
+        $('.hidAgreeButtons').show();
+    }
+
+
+    function fRedirectToTroubleTicket() {
+
+        $('#tblmain .hidNpDetected').hide();
+        $('#tblmain .hidTroubleConnecting').show();
+        $('.hidAgreeButtons').hide();
+        //window.location.href = '@Url.Content("~/CreateTroubleTicket/CreateTroubleTicket/")';
+        return false;
+    }
+
+    function fRedirectToCreateTroubleTicket() {
+
+        window.location.href = '@Url.Content("~/CreateTroubleTicket/CreateTroubleTicket/")';
+        return false;
+    }
+</script>

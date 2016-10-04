@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:left;border:none" ng-controller="CircuitIDNotListedController">
+    <div style="height:100%;width:75%;">
+        <div>
+            <h2>Create Trouble Ticket</h2>
+        </div>
+        <hr />
+    </div>
+
+    <div ng-show="hidsuccesmsg">
+        <div class="row">
+            <div class="col-md-12">
+                <h3><img src="~/resources/img/check-mark-3-icon.fw.png" style="height:30px;width:30px">&nbsp;{{responsemessage}} </h3>
+            </div>
+        </div>
+        <div style="height:50px"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Your email has been sent concerning your Circuit ID not found.if you still need to <br />create a Trouble Ticket, please contact our Commercial Customer Support Center at 1.888.637.9620</h5>
+            </div>
+        </div>
+        <div style="height:20px"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn-default" ng-click="close()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div ng-hide="hidsuccesmsg">
+        <div style="height:20px"></div>
+        <div><h3>Circuit ID not Listed</h3></div>
+
+
+        <div style="height:20px"></div>
+        <div class="row row-eq-height"></div>
+        <div class="alert alert-danger" role="alert">
+            <div>
+                <div>
+                    <strong>We're sorry, your Circuit ID is not listed.</strong><br />
+                    Please fill out the below to norify us about the Cicuit ID. <br />
+                    Please contact our Commercial Support Center at 1.888.637.9620 to report your Trouble Ticket.
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-eq-height"></div>
+        <div style="height:20px"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4"><b>Name:</b></div>
+                <div class="col-md-8"><input name="input" class="w100" ng-model="custname" required /> </div>
+            </div>
+            <div style="height:15px"></div>
+            <div class="row">
+                <div class="col-md-4"><b>Email Address:</b></div>
+                <div class="col-md-8"><input name="input" class="w100" ng-model="custemail" required /> </div>
+            </div>
+            <div style="height:15px"></div>
+            <div class="row">
+                <div class="col-md-4"><b>Circuit ID not listed:</b></div>
+                <div class="col-md-8"><input name="input" class="w100" ng-model="custcircuitid" required /> </div>
+            </div>
+            <div style="height:15px"></div>
+            <div class="row">
+                <div class="col-md-4"><b>Comments:</b></div>
+                <div class="col-md-8"><textarea name="input" class="w100" rows="6" ng-model="custcomments" required></textarea> </div>
+            </div>
+        </div>
+        <div style="height:15px"></div>
+        <div class="row pull-right">
+            <div class="col-md-12">
+                <button class="btn-default">Cancel</button>
+                <button class="btn-danger" style="margin-left:10px" ng-click="submitaction()">Submit</button>
+            </div>
+        </div>
+        <div style="height:100px"></div>
+    </div>
+</div>
