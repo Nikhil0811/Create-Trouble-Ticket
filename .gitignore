@@ -1,0 +1,225 @@
+
+@{
+    ViewBag.Title = "CreateTroubleTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateTroubleTicket</h2>
+<div class="container-fluid" ng-controller="CreateTroubleTicket">
+    <div class="row">
+        <div class="col-md-12"><hr /></div>
+    </div>
+    <div class="row" id="dvCreateTroubleInput">
+        <div class="col-md-12">
+
+            <div class="row-eq-height h1"></div>
+            <div class="row">
+                <div class="col-md-3" style="border:none">
+                    <label for="selAccount" style="align-items:center">Phone Number</label>
+                </div>
+                <div class="col-md-6" style="border:none;margin-bottom:3px;margin-right:30px">
+                    <input type="text" value="585-555-0666" />
+                </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="glyphicon glyphicon-alert" style="color:#af111c;font-size:inherit;">
+                                <strong>Create a Trouble Ticket will incure a charge of $XX if a service call is needed.</strong><br />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+            <div class="row-eq-height h4"></div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>
+                        Please complete the form below
+                    </h3>
+                </div>
+            </div>
+            <div class="row-eq-height h1"><div class="col-md-8"><hr /></div> </div>
+            <div class="row-eq-height h1"></div><br>
+            <span style="color:red">* <i>Denotes Required Field</i></span>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">Billing Name</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><input id="txtBillingName" placeholder="Handsome B.Wonderfull" style="width:60%" ng-model="troubleTicketDetails.BillingName" /> </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+            <div class="row">
+                <div class="col-md-12">Address</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><input id="txtBillingName" placeholder="130 Park Ave Rochester NY 14607" style="width:60%" ng-model="troubleTicketDetails.Address" /> </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+            <div class="row">
+                <div class="col-md-12">Phone Number<span> *</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" ng-model="troubleTicketDetails.PrimPhone1" name="Primphone1" id="Primphone1" maxlength="3" style="width:5%" placeholder="585" required> -
+                    <input type="text" ng-model="troubleTicketDetails.PrimPhone2" name="Primphone2" id="Primphone2" maxlength="3" style="width:8%" placeholder="555" required> -
+                    <input type="text" ng-model="troubleTicketDetails.PrimPhone3" name="Primphone3" id="Primphone3" maxlength="4" style="width:10%" placeholder="0686" required>
+                </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+            <div class="row">
+                <div class="col-md-12">Alternate Phone Number</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" ng-click="dropDwn()" ng-model="troubleTicketDetails.AltPhone1" name="secphone1" id="secphone1" maxlength="3" style="width:5%" placeholder="585"> -
+                    <input type="text" ng-model="troubleTicketDetails.AltPhone2" name="secphone2" id="secphone2" maxlength="3" style="width:8%" placeholder="555"> -
+                    <input type="text" ng-model="troubleTicketDetails.AltPhone3" name="secphone3" id="secphone3" maxlength="4" style="width:10%" placeholder="0686">
+                </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+            <div class="row">
+                <div class="col-md-12">Appointment Date/Time<span> *</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <select class="form-control" ng-model="troubleTicketDetails.AppointmentInfo" id="selAppointmentDateAndTime" @*onchange="return fnOnchangeEvent();"*@>
+                        <option value="" selected disabled>Please select date and time</option>
+                        <option value="Dec 25, 2015:  8am & 12pm EST.">Dec 25, 2015:  8am & 12pm EST. </option>
+                        <option value="Dec 25, 2015: 12pm & 5pm EST.">Dec 25, 2015: 12pm & 5pm EST. </option>
+                        <option value="Dec 27, 2015:  8am & 12pm EST.">Dec 27, 2015:  8am & 12pm EST. </option>
+                        <option value="Dec 257 2015: 12pm & 5pm EST.">Dec 257 2015: 12pm & 5pm EST. </option>
+                    </select>
+                </div>
+                <div><a href="#" id="aSave">Save</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" id="aCancel">Cancel</a> </div>
+            </div>
+            <div class="row-eq-height h1"></div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <button class="btn-default">Cancel</button>
+                    <button class="btn-danger" onclick="return fnContinue();">Continue</button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row" id="dvReviewInputField">
+
+        <div class="row-eq-height h1"></div>
+
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h1"></div>
+        <div>
+            Phone Number &nbsp; &nbsp; &nbsp;
+            <input type="text" value="585-555-0666">
+        </div><br>
+        <div class="row">
+            <div class="col-md-6">
+                Please review and confirm the information below
+            </div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h2"></div>
+        <div class="row"><div class="col-md-8"><hr /></div></div>
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h2"></div>
+        <div class="row">
+            <div class="col-md-6">Billing Name: {{troubleTicketDetails.BillingName}}</div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-6">Address: {{troubleTicketDetails.Address}}</div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-6">Phone Number: {{troubleTicketDetails.PrimPhone1}}-{{troubleTicketDetails.PrimPhone2}}-{{troubleTicketDetails.PrimPhone3}}</div>
+
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-6">Alternative Phone Number: {{troubleTicketDetails.AltPhone1}}-{{troubleTicketDetails.AltPhone2}}-{{troubleTicketDetails.AltPhone3}}</div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-8">Appointment Date/Time: {{troubleTicketDetails.AppointmentInfo}}</div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-5">
+                <button class="btn-default" onclick="return fnBack();">Back</button>
+                <button class="btn-danger" onclick="return fnReviewContinue();">Continue</button>
+            </div>
+
+        </div>
+    </div>
+    <div id="dvTicketCreated">
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>   <img src="~/resources/img/check-mark-3-icon.fw.png" style="height:30px;width:30px">Your ticket has been submitted.</h3>
+            </div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-6">Ticket Number: <b>33564947981</b></div>
+        </div>
+        <div class="row-eq-height h1"></div>
+        <div class="row-eq-height h1"></div>
+        <div class="row">
+            <div class="col-md-5">
+                <button class="btn-danger" onclick="return fnEditTicket();">View/Edit Ticket</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+    <div class="row-eq-height h1"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dvCreateTroubleInput').show();
+        $('#dvReviewInputField').hide();
+        $('#dvTicketCreated').hide();
+    });
+
+    function fnContinue() {
+        $('#dvCreateTroubleInput').hide();
+        $('#dvTicketCreated').hide();
+        $('#dvReviewInputField').show();
+
+
+        return false;
+    }
+    function fnReviewContinue() {
+        $('#dvCreateTroubleInput').hide();
+        $('#dvTicketCreated').show();
+        $('#dvReviewInputField').hide();
+
+        return false;
+    }
+
+    function fnBack() {
+        $('#dvCreateTroubleInput').show();
+        $('#dvReviewInputField').hide();
+        $('#dvTicketCreated').hide();
+
+        return false;
+    }
+
+    function fnEditTicket() {
+        window.location.href = '@Url.Content("~/CreateTroubleTicket/TroubleTicketPanel/")';
+        return false;
+    }
+
+</script>
